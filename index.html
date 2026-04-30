@@ -10,6 +10,7 @@
             --navy: #1a2a6c;
             --soft-white: #f8f9fa;
             --text-dark: #333;
+            --accent-green: #27ae60;
         }
 
         body {
@@ -59,15 +60,24 @@
             .slide-card:nth-child(even) { flex-direction: row-reverse; }
         }
 
-        .card-img { background-size: cover; background-position: center; min-height: 250px; }
+        .card-img { background-size: cover; background-position: center; min-height: 200px; }
         .card-content { padding: 30px; display: flex; flex-direction: column; justify-content: center; }
 
         .step-num { color: var(--gold); font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; }
-        .card-content h2 { margin: 0 0 15px; font-size: 1.4rem; color: var(--navy); border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        
-        .question { font-weight: bold; margin-bottom: 8px; display: block; }
-        .question::before { content: "Q. "; color: var(--gold); }
-        .answer { color: #666; margin: 0; font-size: 0.95rem; line-height: 1.8; }
+        .card-content h2 { margin: 0 0 10px; font-size: 1.4rem; color: var(--navy); }
+        .card-content p { color: #666; margin-bottom: 20px; font-size: 0.95rem; }
+
+        .btn {
+            display: inline-block;
+            background: var(--navy);
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-align: center;
+            align-self: flex-start;
+        }
 
         footer { text-align: center; padding: 40px; color: #999; }
     </style>
@@ -75,69 +85,65 @@
 <body>
 
 <div class="hero">
-    <h1>ライフサポート・ナビ</h1>
+    <h1>Life Support Portal</h1>
     <p>安心を、もっと身近に。もっと楽しく。</p>
 </div>
 
 <div class="container">
-    <!-- 01 -->
+    <!-- 1-5のツールカード -->
     <div class="slide-card">
         <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
             <span class="step-num">01 | Knowledge</span>
-            <h2>はじめの一歩</h2>
-            <span class="question">何から手をつければいいですか？</span>
-            <p class="answer">まずは「情報の整理」です。エンディングノートを使い、自分の家計や連絡先、希望する医療方針などを書き出すことから始めましょう。</p>
+            <h2>150のヒント</h2>
+            <p>相続、医療、介護の不安を検索機能でスッキリ解消。</p>
+            <a href="https://life-supporter-jp.github.io/kiso150/" class="btn">開く</a>
         </div>
     </div>
 
-    <!-- 02 -->
     <div class="slide-card">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=500&q=80')"></div>
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
-            <span class="step-num">02 | Heritage</span>
-            <h2>相続のルール</h2>
-            <span class="question">遺言書は必ず必要ですか？</span>
-            <p class="answer">家族間のトラブルを防ぐためには非常に有効です。特に分け方を指定したい場合は、公正証書遺言を作成しておくのが最も安心です。</p>
+            <span class="step-num">02 | Exercise</span>
+            <h2>AI健康体操</h2>
+            <p>AIの指示に合わせて心身リフレッシュ。毎日を元気に。</p>
+            <a href="https://life-supporter-jp.github.io/taisou/" class="btn">始める</a>
         </div>
     </div>
 
-    <!-- 03 -->
     <div class="slide-card">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1505751172107-573225a94022?auto=format&fit=crop&w=500&q=80')"></div>
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
-            <span class="step-num">03 | Medical</span>
-            <h2>医療と介護</h2>
-            <span class="question">延命治療の希望はどう伝える？</span>
-            <p class="answer">「リビング・ウィル」として書面に残しましょう。意識がなくなった後でも意志が尊重されるよう、家族と話し合っておくことが大切です。</p>
+            <span class="step-num">03 | Life Check</span>
+            <h2>60項目の整理術</h2>
+            <p>お金からデジタル遺産まで、人生の棚卸しを完全サポート。</p>
+            <a href="https://life-supporter-jp.github.io/life-check/" class="btn">チェック</a>
         </div>
     </div>
 
-    <!-- 04 -->
     <div class="slide-card">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1581578731522-6b6dea136697?auto=format&fit=crop&w=500&q=80')"></div>
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
-            <span class="step-num">04 | Decluttering</span>
-            <h2>生前整理</h2>
-            <span class="question">モノが捨てられません。</span>
-            <p class="answer">「捨てる」ではなく「選ぶ」と考えます。今の生活に本当に必要なものだけを残し、思い出の品は写真に撮るなどして整理しましょう。</p>
+            <span class="step-num">04 | Daily Fortune</span>
+            <h2>3つの扉の運勢鑑定</h2>
+            <p>毎朝の新しい習慣。あなたの運勢を扉から選びましょう。</p>
+            <a href="https://life-supporter-jp.github.io/unsei/" class="btn">占う</a>
         </div>
     </div>
 
-    <!-- 05 -->
     <div class="slide-card">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=500&q=80')"></div>
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1516533074963-34cc37482811?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
-            <span class="step-num">05 | Memorial</span>
-            <h2>お墓の形</h2>
-            <span class="question">継承者がいない場合は？</span>
-            <p class="answer">「墓じまい」をして、永代供養墓や樹木葬、散骨といった形を選ぶ方が増えています。自分に合った供養の方法を検討しましょう。</p>
+            <span class="step-num">05 | Brain Training</span>
+            <h2>ひらがな並び替え</h2>
+            <p>自分のペースでじっくり脳トレ。言葉を紡ぐ楽しみを。</p>
+            <a href="https://life-supporter-jp.github.io/narabikae/" class="btn">挑戦する</a>
         </div>
     </div>
 </div>
 
 <footer>
-    &copy; 2026 Life Supporter JP
+    &copy; 2026 Life Supporter JP - 安心を形にするお手伝い
 </footer>
 
 </body>
