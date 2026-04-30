@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life Support Portal</title>
+    <title>Life Support Premium</title>
     <style>
         :root {
             --gold: #d4af37;
@@ -21,10 +21,13 @@
             line-height: 1.6;
         }
 
-        /* ヒーローセクション（タイトルエリア） */
+        /* ヒーローセクション */
         .hero {
-            background: linear-gradient(rgba(26, 42, 108, 0.8), rgba(26, 42, 108, 0.8));
-            height: 40vh;
+            background: linear-gradient(rgba(26, 42, 108, 0.7), rgba(26, 42, 108, 0.7)), 
+                        url('https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -34,41 +37,39 @@
             padding: 0 20px;
         }
 
-        .hero h1 { font-size: 2.2rem; margin-bottom: 10px; letter-spacing: 2px; }
-        .hero p { opacity: 0.9; font-size: 1.1rem; }
+        .hero h1 { font-size: 2.2rem; margin-bottom: 10px; }
 
-        .container { max-width: 800px; margin: -50px auto 50px; padding: 0 15px; }
+        .container { max-width: 900px; margin: -40px auto 50px; padding: 0 15px; }
 
-        /* カードデザイン（縦に並ぶ形式） */
+        /* カードデザイン */
         .slide-card {
             background: white;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             display: flex;
             flex-direction: column;
-            border-top: 5px solid var(--gold);
         }
 
-        .card-content { padding: 40px; }
+        @media (min-width: 768px) {
+            .slide-card { flex-direction: row; min-height: 300px; }
+            .card-img { width: 40%; }
+            .card-content { width: 60%; }
+            .slide-card:nth-child(even) { flex-direction: row-reverse; }
+        }
 
-        .step-num { color: var(--gold); font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; display: block; }
-        .card-content h2 { margin: 0 0 15px; font-size: 1.5rem; color: var(--navy); border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .card-img { background-size: cover; background-position: center; min-height: 250px; }
+        .card-content { padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+
+        .step-num { color: var(--gold); font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; }
+        .card-content h2 { margin: 0 0 15px; font-size: 1.4rem; color: var(--navy); border-bottom: 1px solid #eee; padding-bottom: 5px; }
         
-        .question { font-weight: bold; color: var(--text-dark); display: block; margin-bottom: 8px; font-size: 1.1rem; }
+        .question { font-weight: bold; margin-bottom: 8px; display: block; }
         .question::before { content: "Q. "; color: var(--gold); }
-        .answer { color: #555; margin: 0; line-height: 1.8; }
+        .answer { color: #666; margin: 0; font-size: 0.95rem; line-height: 1.8; }
 
-        /* 結びのメッセージ */
-        .closing {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--navy);
-        }
-        .closing p { font-size: 1.1rem; font-style: italic; }
-
-        footer { text-align: center; padding: 40px; color: #999; font-size: 0.8rem; }
+        footer { text-align: center; padding: 40px; color: #999; }
     </style>
 </head>
 <body>
@@ -79,58 +80,59 @@
 </div>
 
 <div class="container">
-    <!-- 01: 始め方 -->
+    <!-- 01 -->
     <div class="slide-card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
-            <span class="step-num">STEP 01 | 準備</span>
+            <span class="step-num">01 | Knowledge</span>
             <h2>はじめの一歩</h2>
             <span class="question">何から手をつければいいですか？</span>
-            <p class="answer">まずは「情報の整理」です。エンディングノートを使い、自分の財産や連絡先、希望する医療方針などを書き出すことから始めましょう。形にすることで、不安が具体策に変わります。</p>
+            <p class="answer">まずは「情報の整理」です。エンディングノートを使い、自分の家計や連絡先、希望する医療方針などを書き出すことから始めましょう。</p>
         </div>
     </div>
 
-    <!-- 02: 相続 -->
+    <!-- 02 -->
     <div class="slide-card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
-            <span class="step-num">STEP 02 | 遺言</span>
+            <span class="step-num">02 | Heritage</span>
             <h2>相続のルール</h2>
             <span class="question">遺言書は必ず必要ですか？</span>
-            <p class="answer">家族間のトラブルを防ぐためには非常に有効です。特に財産が複雑な場合や、分け方を指定したい場合は、公正証書遺言を作成しておくのが最も安心な方法です。</p>
+            <p class="answer">家族間のトラブルを防ぐためには非常に有効です。特に分け方を指定したい場合は、公正証書遺言を作成しておくのが最も安心です。</p>
         </div>
     </div>
 
-    <!-- 03: 医療 -->
+    <!-- 03 -->
     <div class="slide-card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1505751172107-573225a94022?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
-            <span class="step-num">STEP 03 | 意思</span>
+            <span class="step-num">03 | Medical</span>
             <h2>医療と介護</h2>
-            <span class="question">延命治療の希望はどう伝えればいい？</span>
-            <p class="answer">「リビング・ウィル」として書面に残しましょう。意識がなくなった後でも、あなたの意志が尊重されるよう、家族や主治医と繰り返し話し合っておくことが大切です。</p>
+            <span class="question">延命治療の希望はどう伝える？</span>
+            <p class="answer">「リビング・ウィル」として書面に残しましょう。意識がなくなった後でも意志が尊重されるよう、家族と話し合っておくことが大切です。</p>
         </div>
     </div>
 
-    <!-- 04: 片付け -->
+    <!-- 04 -->
     <div class="slide-card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1581578731522-6b6dea136697?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
-            <span class="step-num">STEP 04 | 整理</span>
-            <h2>生前整理のコツ</h2>
+            <span class="step-num">04 | Decluttering</span>
+            <h2>生前整理</h2>
             <span class="question">モノが捨てられません。</span>
-            <p class="answer">「捨てる」ではなく「選ぶ」と考えます。これからの生活に本当に必要なものだけを残し、思い出の品は写真に撮るなどしてコンパクトに。無理のない範囲で進めましょう。</p>
+            <p class="answer">「捨てる」ではなく「選ぶ」と考えます。今の生活に本当に必要なものだけを残し、思い出の品は写真に撮るなどして整理しましょう。</p>
         </div>
     </div>
 
-    <!-- 05: 供養 -->
+    <!-- 05 -->
     <div class="slide-card">
+        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=500&q=80')"></div>
         <div class="card-content">
-            <span class="step-num">STEP 05 | 供養</span>
+            <span class="step-num">05 | Memorial</span>
             <h2>お墓の形</h2>
             <span class="question">継承者がいない場合は？</span>
-            <p class="answer">「墓じまい」をして、永代供養墓や樹木葬、散骨といった新しい形を選択する方が増えています。自分たちの代で完結できる方法を検討してみましょう。</p>
+            <p class="answer">「墓じまい」をして、永代供養墓や樹木葬、散骨といった形を選ぶ方が増えています。自分に合った供養の方法を検討しましょう。</p>
         </div>
-    </div>
-
-    <div class="closing">
-        <p>終活は、今をより良く生きるための準備です。<br>あなたのペースで、ゆっくり進めていきましょう。</p>
     </div>
 </div>
 
