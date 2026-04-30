@@ -3,146 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ライフサポート ポータル</title>
+    <title>ライフサポート・ナビ</title>
     <style>
         :root {
-            --primary-bg: #f0f4f8;
-            --card-bg: #ffffff;
-            --accent-color: #4a90e2;
-            --text-main: #333;
-            --text-sub: #666;
+            --navy: #1a2a6c;
+            --gold: #d4af37;
+            --soft-white: #f8f9fa;
+            --text-dark: #333;
         }
-        body {
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            background-color: var(--primary-bg);
-            margin: 0;
-            padding: 20px 15px;
-            color: var(--text-main);
+
+        body, html {
+            margin: 0; padding: 0; height: 100%; overflow: hidden;
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+            background-color: var(--navy);
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+
+        /* スライド全体のコンテナ */
+        .slides-container {
+            display: flex; width: 700%; height: 100%;
+            transition: transform 0.6s cubic-bezier(0.45, 0, 0.55, 1);
         }
-        h1 {
-            text-align: center;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            margin-bottom: 25px;
+
+        .slide {
+            width: 100vw; height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 20px; box-sizing: border-box;
+            background-color: var(--soft-white);
         }
-        .menu-link {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-            background: var(--card-bg);
-            margin-bottom: 15px;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border-left: 6px solid var(--accent-color);
+
+        /* タイトルと結びのスライドは濃色背景 */
+        .s-dark { background: linear-gradient(135deg, #1a2a6c 0%, #000000 100%); color: white; }
+
+        .card {
+            background: white;
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: left;
+            border-top: 6px solid var(--gold);
         }
-        .menu-link:active {
-            transform: scale(0.98);
-            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        .s-dark .card { background: transparent; box-shadow: none; border: none; text-align: center; color: white; }
+
+        h1 { font-size: 2.2rem; margin-bottom: 15px; letter-spacing: 1px; }
+        h2 { font-size: 1.6rem; color: var(--navy); margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        
+        .question { font-weight: bold; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 10px; display: block; }
+        .question::before { content: "Q. "; color: var(--gold); font-size: 1.3rem; }
+        .answer { line-height: 1.8; color: #555; font-size: 1rem; margin: 0; }
+
+        /* ナビゲーションボタン */
+        .nav-btn {
+            position: absolute; bottom: 30px;
+            background: rgba(26, 42, 108, 0.8); color: white; border: none;
+            padding: 12px 30px; cursor: pointer; border-radius: 50px;
+            font-size: 0.9rem; z-index: 10; transition: 0.3s;
         }
-        .title-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .number {
-            background: var(--accent-color);
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-        .title-text {
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        .description {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: var(--text-sub);
-            padding-left: 40px;
-        }
-        .category-tags {
-            margin-top: 10px;
-            padding-left: 40px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-        .tag {
-            font-size: 0.75rem;
-            background: #e1e8ed;
-            padding: 2px 8px;
-            border-radius: 4px;
-            color: #555;
-        }
+        .nav-btn:hover { background: var(--navy); transform: scale(1.05); }
+        .prev { left: 30px; }
+        .next { right: 30px; }
+        
+        .page-num { position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); color: #999; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>ライフサポート ツール集</h1>
+<button class="nav-btn prev" onclick="moveSlide(-1)">前へ</button>
+<button class="nav-btn next" onclick="moveSlide(1)">次へ</button>
+<div class="page-num" id="page-num">1 / 7</div>
 
-    <!-- 1) 150からのヒント -->
-    <a href="https://life-supporter-jp.github.io/kiso150/" class="menu-link">
-        <div class="title-row">
-            <div class="number">1</div>
-            <div class="title-text">これからが不安という人に150からのヒント</div>
+<div class="slides-container" id="slider">
+    <!-- 0: タイトル -->
+    <div class="slide s-dark">
+        <div class="card">
+            <h1 style="color:var(--gold)">ライフサポート・ナビ</h1>
+            <p style="font-size: 1.1rem; opacity: 0.9;">～ 終活の疑問を整え、明日を軽やかに ～</p>
+            <div style="margin-top: 40px; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 5px 15px; border-radius: 20px;">
+                右下の「次へ」で進む
+            </div>
         </div>
-        <div class="description">検索機能付き。相続、医療、介護、保健、葬儀、お墓について簡単に調べられます。</div>
-    </a>
+    </div>
 
-    <!-- 2) 体操とゲーム -->
-    <a href="https://life-supporter-jp.github.io/taisou/" class="menu-link">
-        <div class="title-row">
-            <div class="number">2</div>
-            <div class="title-text">簡単な体操とゲームで毎日リフレッシュ</div>
+    <!-- 1: 始め方 -->
+    <div class="slide">
+        <div class="card">
+            <h2>1. はじめの一歩</h2>
+            <span class="question">終活は何から始めるのが正解ですか？</span>
+            <p class="answer">「物の整理」と「心の整理」を同時に進めるのがコツです。まずはエンディングノートを使い、自分の財産や延命治療、葬儀の希望を書き出すことから始めましょう。書くことで不安が整理されます。</p>
         </div>
-        <div class="description">AIが体操指示を出します。一人でも大勢でも、時間設定して運動できます。</div>
-    </a>
+    </div>
 
-    <!-- 3) マイライフチェック60 -->
-    <a href="https://life-supporter-jp.github.io/life-check/" class="menu-link">
-        <div class="title-row">
-            <div class="number">3</div>
-            <div class="title-text">マイライフチェック60項目とメモ帳</div>
+    <!-- 2: 相続 -->
+    <div class="slide">
+        <div class="card">
+            <h2>2. 相続と遺言</h2>
+            <span class="question">家族が仲良くても遺言書は必要ですか？</span>
+            <p class="answer">仲が良いからこそ、手続きの負担を減らすために必要です。遺言書がないと、法的な手続き（遺産分割協議）で家族に心労をかける場合があります。「思いを形にする」のが遺言の役割です。</p>
         </div>
-        <div class="description">全6章（お金、介護、医療、心、葬儀、デジタル遺産）。各項目に解説文付き。</div>
-        <div class="category-tags">
-            <span class="tag">財産管理</span><span class="tag">健康</span><span class="tag">供養</span><span class="tag">デジタル遺産</span>
-        </div>
-    </a>
+    </div>
 
-    <!-- 4) 運勢鑑定 -->
-    <a href="https://life-supporter-jp.github.io/unsei/" class="menu-link">
-        <div class="title-row">
-            <div class="number">4</div>
-            <div class="title-text">運勢鑑定</div>
+    <!-- 3: 医療・介護 -->
+    <div class="slide">
+        <div class="card">
+            <h2>3. 医療と介護</h2>
+            <span class="question">もしもの時の意思表示はどうすれば？</span>
+            <p class="answer">「リビング・ウィル（尊厳死宣言）」という形で、延命治療に関する希望を文書に残しておくことが推奨されます。また、信頼できる家族と日頃から「どう過ごしたいか」を話し合っておくことも大切です。</p>
         </div>
-        <div class="description">毎日1回、3つの扉から今日の運勢を占います。</div>
-    </a>
+    </div>
 
-    <!-- 5) ひらがな並び替えゲーム -->
-    <a href="https://life-supporter-jp.github.io/narabikae/" class="menu-link">
-        <div class="title-row">
-            <div class="number">5</div>
-            <div class="title-text">ひらがな並び替えゲーム</div>
+    <!-- 4: 生前整理 -->
+    <div class="slide">
+        <div class="card">
+            <h2>4. 生前整理（片付け）</h2>
+            <span class="question">溜まった荷物をどう減らせばいい？</span>
+            <p class="answer">「使えるかどうか」ではなく「今使っているか」で判断します。1年以上触れていないものは手放す候補に。一度に全部やろうとせず、まずは「引き出し一つ」から始めるのが成功の秘訣です。</p>
         </div>
-        <div class="description">脳トレに最適。時間制限がないので、ゆっくり自分のペースで遊べます。</div>
-    </a>
+    </div>
 
+    <!-- 5: 供養 -->
+    <div class="slide">
+        <div class="card">
+            <h2>5. 葬儀とお墓</h2>
+            <span class="question">お墓の跡継ぎがいない場合は？</span>
+            <p class="answer">最近では「永代供養墓」や「樹木葬」、海洋散骨など、跡継ぎを必要としない供養の方法が普及しています。自分に合った形を事前にリサーチし、親族に伝えておくと安心です。</p>
+        </div>
+    </div>
+
+    <!-- 6: 結び -->
+    <div class="slide s-dark">
+        <div class="card">
+            <h1 style="color:var(--gold)">心地よい毎日のために</h1>
+            <p style="font-size: 1rem; line-height: 2; max-width: 500px; margin: 0 auto;">
+                終活とは、人生の後半戦を<br>
+                より自分らしく、より軽やかに歩むための準備です。<br><br>
+                一つひとつの不安を安心に変えて、<br>
+                今日という日を大切に過ごしていきましょう。
+            </p>
+        </div>
+    </div>
 </div>
+
+<script>
+    let currentSlide = 0;
+    const totalSlides = 7;
+    const slider = document.getElementById('slider');
+    const pageNum = document.getElementById('page-num');
+
+    function moveSlide(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        slider.style.transform = `translateX(-${currentSlide * 100}vw)`;
+        pageNum.innerText = `${currentSlide + 1} / ${totalSlides}`;
+    }
+
+    // キーボード操作
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "ArrowRight") moveSlide(1);
+        if (e.key === "ArrowLeft") moveSlide(-1);
+    });
+</script>
 
 </body>
 </html>
