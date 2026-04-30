@@ -3,166 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ライフサポート・ナビ</title>
+    <title>Life Support Portal</title>
     <style>
         :root {
-            --navy: #1a2a6c;
             --gold: #d4af37;
+            --navy: #1a2a6c;
             --soft-white: #f8f9fa;
             --text-dark: #333;
         }
 
-        body, html {
-            margin: 0; padding: 0; height: 100%; overflow: hidden;
+        body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
-            background-color: var(--navy);
-        }
-
-        /* スライド全体のコンテナ */
-        .slides-container {
-            display: flex; width: 700%; height: 100%;
-            transition: transform 0.6s cubic-bezier(0.45, 0, 0.55, 1);
-        }
-
-        .slide {
-            width: 100vw; height: 100vh;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            padding: 20px; box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             background-color: var(--soft-white);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
-        /* タイトルと結びのスライドは濃色背景 */
-        .s-dark { background: linear-gradient(135deg, #1a2a6c 0%, #000000 100%); color: white; }
+        /* ヒーローセクション（タイトルエリア） */
+        .hero {
+            background: linear-gradient(rgba(26, 42, 108, 0.8), rgba(26, 42, 108, 0.8));
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
 
-        .card {
+        .hero h1 { font-size: 2.2rem; margin-bottom: 10px; letter-spacing: 2px; }
+        .hero p { opacity: 0.9; font-size: 1.1rem; }
+
+        .container { max-width: 800px; margin: -50px auto 50px; padding: 0 15px; }
+
+        /* カードデザイン（縦に並ぶ形式） */
+        .slide-card {
             background: white;
-            max-width: 700px;
-            width: 100%;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            text-align: left;
-            border-top: 6px solid var(--gold);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            border-top: 5px solid var(--gold);
         }
-        .s-dark .card { background: transparent; box-shadow: none; border: none; text-align: center; color: white; }
 
-        h1 { font-size: 2.2rem; margin-bottom: 15px; letter-spacing: 1px; }
-        h2 { font-size: 1.6rem; color: var(--navy); margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .card-content { padding: 40px; }
+
+        .step-num { color: var(--gold); font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .card-content h2 { margin: 0 0 15px; font-size: 1.5rem; color: var(--navy); border-bottom: 1px solid #eee; padding-bottom: 10px; }
         
-        .question { font-weight: bold; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 10px; display: block; }
-        .question::before { content: "Q. "; color: var(--gold); font-size: 1.3rem; }
-        .answer { line-height: 1.8; color: #555; font-size: 1rem; margin: 0; }
+        .question { font-weight: bold; color: var(--text-dark); display: block; margin-bottom: 8px; font-size: 1.1rem; }
+        .question::before { content: "Q. "; color: var(--gold); }
+        .answer { color: #555; margin: 0; line-height: 1.8; }
 
-        /* ナビゲーションボタン */
-        .nav-btn {
-            position: absolute; bottom: 30px;
-            background: rgba(26, 42, 108, 0.8); color: white; border: none;
-            padding: 12px 30px; cursor: pointer; border-radius: 50px;
-            font-size: 0.9rem; z-index: 10; transition: 0.3s;
+        /* 結びのメッセージ */
+        .closing {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--navy);
         }
-        .nav-btn:hover { background: var(--navy); transform: scale(1.05); }
-        .prev { left: 30px; }
-        .next { right: 30px; }
-        
-        .page-num { position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); color: #999; font-size: 0.8rem; }
+        .closing p { font-size: 1.1rem; font-style: italic; }
+
+        footer { text-align: center; padding: 40px; color: #999; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<button class="nav-btn prev" onclick="moveSlide(-1)">前へ</button>
-<button class="nav-btn next" onclick="moveSlide(1)">次へ</button>
-<div class="page-num" id="page-num">1 / 7</div>
+<div class="hero">
+    <h1>ライフサポート・ナビ</h1>
+    <p>安心を、もっと身近に。もっと楽しく。</p>
+</div>
 
-<div class="slides-container" id="slider">
-    <!-- 0: タイトル -->
-    <div class="slide s-dark">
-        <div class="card">
-            <h1 style="color:var(--gold)">ライフサポート・ナビ</h1>
-            <p style="font-size: 1.1rem; opacity: 0.9;">～ 終活の疑問を整え、明日を軽やかに ～</p>
-            <div style="margin-top: 40px; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 5px 15px; border-radius: 20px;">
-                右下の「次へ」で進む
-            </div>
+<div class="container">
+    <!-- 01: 始め方 -->
+    <div class="slide-card">
+        <div class="card-content">
+            <span class="step-num">STEP 01 | 準備</span>
+            <h2>はじめの一歩</h2>
+            <span class="question">何から手をつければいいですか？</span>
+            <p class="answer">まずは「情報の整理」です。エンディングノートを使い、自分の財産や連絡先、希望する医療方針などを書き出すことから始めましょう。形にすることで、不安が具体策に変わります。</p>
         </div>
     </div>
 
-    <!-- 1: 始め方 -->
-    <div class="slide">
-        <div class="card">
-            <h2>1. はじめの一歩</h2>
-            <span class="question">終活は何から始めるのが正解ですか？</span>
-            <p class="answer">「物の整理」と「心の整理」を同時に進めるのがコツです。まずはエンディングノートを使い、自分の財産や延命治療、葬儀の希望を書き出すことから始めましょう。書くことで不安が整理されます。</p>
+    <!-- 02: 相続 -->
+    <div class="slide-card">
+        <div class="card-content">
+            <span class="step-num">STEP 02 | 遺言</span>
+            <h2>相続のルール</h2>
+            <span class="question">遺言書は必ず必要ですか？</span>
+            <p class="answer">家族間のトラブルを防ぐためには非常に有効です。特に財産が複雑な場合や、分け方を指定したい場合は、公正証書遺言を作成しておくのが最も安心な方法です。</p>
         </div>
     </div>
 
-    <!-- 2: 相続 -->
-    <div class="slide">
-        <div class="card">
-            <h2>2. 相続と遺言</h2>
-            <span class="question">家族が仲良くても遺言書は必要ですか？</span>
-            <p class="answer">仲が良いからこそ、手続きの負担を減らすために必要です。遺言書がないと、法的な手続き（遺産分割協議）で家族に心労をかける場合があります。「思いを形にする」のが遺言の役割です。</p>
+    <!-- 03: 医療 -->
+    <div class="slide-card">
+        <div class="card-content">
+            <span class="step-num">STEP 03 | 意思</span>
+            <h2>医療と介護</h2>
+            <span class="question">延命治療の希望はどう伝えればいい？</span>
+            <p class="answer">「リビング・ウィル」として書面に残しましょう。意識がなくなった後でも、あなたの意志が尊重されるよう、家族や主治医と繰り返し話し合っておくことが大切です。</p>
         </div>
     </div>
 
-    <!-- 3: 医療・介護 -->
-    <div class="slide">
-        <div class="card">
-            <h2>3. 医療と介護</h2>
-            <span class="question">もしもの時の意思表示はどうすれば？</span>
-            <p class="answer">「リビング・ウィル（尊厳死宣言）」という形で、延命治療に関する希望を文書に残しておくことが推奨されます。また、信頼できる家族と日頃から「どう過ごしたいか」を話し合っておくことも大切です。</p>
+    <!-- 04: 片付け -->
+    <div class="slide-card">
+        <div class="card-content">
+            <span class="step-num">STEP 04 | 整理</span>
+            <h2>生前整理のコツ</h2>
+            <span class="question">モノが捨てられません。</span>
+            <p class="answer">「捨てる」ではなく「選ぶ」と考えます。これからの生活に本当に必要なものだけを残し、思い出の品は写真に撮るなどしてコンパクトに。無理のない範囲で進めましょう。</p>
         </div>
     </div>
 
-    <!-- 4: 生前整理 -->
-    <div class="slide">
-        <div class="card">
-            <h2>4. 生前整理（片付け）</h2>
-            <span class="question">溜まった荷物をどう減らせばいい？</span>
-            <p class="answer">「使えるかどうか」ではなく「今使っているか」で判断します。1年以上触れていないものは手放す候補に。一度に全部やろうとせず、まずは「引き出し一つ」から始めるのが成功の秘訣です。</p>
+    <!-- 05: 供養 -->
+    <div class="slide-card">
+        <div class="card-content">
+            <span class="step-num">STEP 05 | 供養</span>
+            <h2>お墓の形</h2>
+            <span class="question">継承者がいない場合は？</span>
+            <p class="answer">「墓じまい」をして、永代供養墓や樹木葬、散骨といった新しい形を選択する方が増えています。自分たちの代で完結できる方法を検討してみましょう。</p>
         </div>
     </div>
 
-    <!-- 5: 供養 -->
-    <div class="slide">
-        <div class="card">
-            <h2>5. 葬儀とお墓</h2>
-            <span class="question">お墓の跡継ぎがいない場合は？</span>
-            <p class="answer">最近では「永代供養墓」や「樹木葬」、海洋散骨など、跡継ぎを必要としない供養の方法が普及しています。自分に合った形を事前にリサーチし、親族に伝えておくと安心です。</p>
-        </div>
-    </div>
-
-    <!-- 6: 結び -->
-    <div class="slide s-dark">
-        <div class="card">
-            <h1 style="color:var(--gold)">心地よい毎日のために</h1>
-            <p style="font-size: 1rem; line-height: 2; max-width: 500px; margin: 0 auto;">
-                終活とは、人生の後半戦を<br>
-                より自分らしく、より軽やかに歩むための準備です。<br><br>
-                一つひとつの不安を安心に変えて、<br>
-                今日という日を大切に過ごしていきましょう。
-            </p>
-        </div>
+    <div class="closing">
+        <p>終活は、今をより良く生きるための準備です。<br>あなたのペースで、ゆっくり進めていきましょう。</p>
     </div>
 </div>
 
-<script>
-    let currentSlide = 0;
-    const totalSlides = 7;
-    const slider = document.getElementById('slider');
-    const pageNum = document.getElementById('page-num');
-
-    function moveSlide(direction) {
-        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-        slider.style.transform = `translateX(-${currentSlide * 100}vw)`;
-        pageNum.innerText = `${currentSlide + 1} / ${totalSlides}`;
-    }
-
-    // キーボード操作
-    document.addEventListener('keydown', (e) => {
-        if (e.key === "ArrowRight") moveSlide(1);
-        if (e.key === "ArrowLeft") moveSlide(-1);
-    });
-</script>
+<footer>
+    &copy; 2026 Life Supporter JP
+</footer>
 
 </body>
 </html>
