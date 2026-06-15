@@ -22,15 +22,19 @@
             line-height: 1.6;
         }
 
-        /* ヘッダーリンク用スタイル */
+        /* ヘッダーリンク用スタイル（視認性を向上） */
         .top-link {
             text-align: right;
-            padding: 10px 20px;
+            padding: 15px 20px;
         }
         .top-link a {
-            color: #999;
-            font-size: 0.85rem;
+            color: #555; /* 色を少し濃くしました */
+            font-size: 0.9rem;
             text-decoration: underline;
+            font-weight: bold;
+        }
+        .top-link a:hover {
+            color: var(--navy); /* マウスを乗せると色が変わります */
         }
 
         /* ヒーローセクション */
@@ -91,7 +95,7 @@
         }
 
         footer { text-align: center; padding: 40px; color: #999; }
-        .copyright-link { display: block; margin-top: 10px; color: #999; text-decoration: underline; font-size: 0.85rem; }
+        .copyright-link { display: block; margin-top: 10px; color: #555; text-decoration: underline; font-size: 0.85rem; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -158,8 +162,8 @@
 </div>
 
 <footer>
-    <p></p><a href="https://life-supporter.jp/lp/75hnZvZp" class="copyright-link">著作権と再配布について</a></p>
     &copy; 2026 Life Supporter JP - 安心を形にするお手伝い
+    <a href="https://life-supporter.jp/lp/75hnZvZp" class="copyright-link">著作権と再配布について</a>
 </footer>
 
 </body>
